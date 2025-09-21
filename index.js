@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
-import connect from "./database/db.js";
+import connect from "./src/database/db.js";
 import dotenv from "dotenv";
-import userRoutes from './routes/userRoutes.js';
-import movieRoutes from './routes/movieRoutes.js';
+import userRoutes from './src/routes/userRoutes.js';
+import movieRoutes from './src/routes/movieRoutes.js';
 
 
 
