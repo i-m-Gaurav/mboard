@@ -12,7 +12,7 @@ import Vote from "./models/votes.js";
 import mongoose from "mongoose";
 import userRoutes from './routes/userRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
-import serverless from "serverless-http";
+
 
 dotenv.config();
 
@@ -72,4 +72,4 @@ app.use('/api/movies',movieRoutes);
 // });
 
 
-export default serverless(app);
+export default app;
