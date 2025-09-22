@@ -207,5 +207,22 @@ export const deleteMovie = async (req, res) => {
 
 }
 
+export const deleteComment = async (req, res) => {
+
+  try {
+
+    const {movieId, commentId} = req.params;
+  
+
+    await Comment.deleteOne({_id: commentId, movie_id: movieId});
+    
+    res.json({message : "Comment deleted"});
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
 
 
