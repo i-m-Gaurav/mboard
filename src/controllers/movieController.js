@@ -102,12 +102,12 @@ export const postComment = async (req, res) => {
       comment,
       user_id: req.user.id,
       movie_id: movieId,
-      username: username
+     
     });
 
     await newComment.save();
 
-    return res.status(201).json({ comment: newComment, message: "Commented" });
+    return res.status(201).json({ comment: newComment, username: username, message: "Commented" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error creating comment" });
