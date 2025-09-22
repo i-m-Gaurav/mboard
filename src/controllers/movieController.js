@@ -95,10 +95,14 @@ export const postComment = async (req, res) => {
       return res.status(404).json({ message: "movie not found" });
     }
 
+    const username = req.user.username;
+    console.log("username", username);
+
     const newComment = new Comment({
       comment,
       user_id: req.user.id,
       movie_id: movieId,
+      username: username
     });
 
     await newComment.save();
