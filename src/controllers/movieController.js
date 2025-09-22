@@ -31,6 +31,9 @@ export const getAllMovies = async (req, res) => {
 
         const comments = await Comment.find({ movie_id: movie._id }).sort({
           createdAt: 1,
+        }).populate({
+          path: "user_id",
+          select: "name"
         });
 
         return {
@@ -95,19 +98,17 @@ export const postComment = async (req, res) => {
       return res.status(404).json({ message: "movie not found" });
     }
 
-    const username = req.user.name;
-    console.log("username", username);
-
+  
     const newComment = new Comment({
       comment,
       user_id: req.user.id,
       movie_id: movieId,
-     
     });
 
     await newComment.save();
+    await newComment.populate('user_id', 'name');
 
-    return res.status(201).json({ comment: newComment, username: username, message: "Commented" });
+    return res.status(201).json({ comment: newComment, message: "Commented" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error creating comment" });
