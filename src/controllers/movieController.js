@@ -87,7 +87,6 @@ export const suggestMovie = async (req, res) => {
 export const postComment = async (req, res) => {
   try {
     const { comment } = req.body;
-    console.log("comment", comment);
     const { movieId } = req.params;
 
     const exists = await Movie.exists({
@@ -164,7 +163,6 @@ export const getUserMovies = async (req, res) => {
     const movies = await Movie.find({ added_by: userId }).lean();
 
    
-    console.log("movies found:", movies);
 
     res.json(movies);
   } catch (error) {
@@ -178,22 +176,22 @@ export const deleteMovie = async (req, res) => {
   try {
 
     const {movieId} = req.params;
-    console.log("movieId to delete", movieId);
+    // console.log("movieId to delete", movieId);
     
-    console.log("req.user in delete movie", req.user.id);
+    // console.log("req.user in delete movie", req.user.id);
 
-    console.log("req.user role in delete movie", req.user.role);
+    // console.log("req.user role in delete movie", req.user.role);
 
     const movie = await Movie.findById(movieId);
     if (!movie) {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    console.log("this is before check");
+    // console.log("this is before check");
     if(req.user.role !== 'admin' && movie.added_by.toString() !== req.user.id){
       return res.status(403).json({ message: "Forbidden: You can only delete your own movies" });
     }
-      console.log("this is after check");
+      // console.log("this is after check");
 
     await Movie.deleteOne({_id: movieId});
 

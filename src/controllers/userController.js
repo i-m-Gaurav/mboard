@@ -51,7 +51,7 @@ try {
   // console.log("userId in get profile", id);
   const user = await User.find({ _id: id });
 
-  console.log(user);
+  // console.log(user);
   // console.log(user);
   res.json(user);
 } catch (error) {
